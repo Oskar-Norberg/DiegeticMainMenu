@@ -1,0 +1,26 @@
+{
+  "name": "com.ringo.diegetic-main-menu",
+  "version": "1.0.0",
+  "displayName": "Diegetic Main Menu",
+  "description": "Package for setting up a diegetic main menu using cinemachine.",
+  
+  "unity": "6000.0",
+  "unityRelease": "34f1",
+
+  "dependencies": {
+    "com.unity.cinemachine": "3.1.3"
+  },
+  
+  "keywords": [
+    "MainMenu",
+    "Diegetic",
+    "UI"
+  ],
+  
+  "author": {
+    "name": "Oskar Norberg",
+    "url": "https://github.com/Oskar-Norberg"
+  },
+
+  "licensesUrl": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+}
