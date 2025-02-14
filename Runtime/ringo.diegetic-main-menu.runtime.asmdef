@@ -1,0 +1,16 @@
+{
+    "name": "ringo.diegetic-main-menu.runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
