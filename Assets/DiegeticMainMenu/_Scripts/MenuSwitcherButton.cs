@@ -1,30 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class MenuSwitcherButton : MonoBehaviour
+namespace DiegeticMainMenu
 {
-    [SerializeField] private Menu menuToGoTo;
-
-    private Button _button;
-
-    private void Awake()
+    [RequireComponent(typeof(Button))]
+    public class MenuSwitcherButton : MonoBehaviour
     {
-        _button = GetComponent<Button>();
-    }
+        [SerializeField] private Menu menuToGoTo;
 
-    private void OnEnable()
-    {
-        _button.onClick.AddListener(SwitchMenu);
-    }
+        private Button _button;
 
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(SwitchMenu);
-    }
+        private void Awake()
+        {
+            _button = GetComponent<Button>();
+        }
 
-    private void SwitchMenu()
-    {
-        MenuManager.Instance.SwitchMenu(menuToGoTo);
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(SwitchMenu);
+        }
+
+        private void OnDisable()
+        {
+            _button.onClick.RemoveListener(SwitchMenu);
+        }
+
+        private void SwitchMenu()
+        {
+            MenuManager.Instance.SwitchMenu(menuToGoTo);
+        }
     }
 }
