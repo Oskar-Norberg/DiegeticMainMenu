@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +23,7 @@ public class MenuSwitcherButton : MonoBehaviour
         _button.onClick.RemoveListener(SwitchMenu);
     }
 
-    public void SwitchMenu()
+    private void SwitchMenu()
     {
         MenuManager.Instance.SwitchMenu(menuToGoTo);
     }
