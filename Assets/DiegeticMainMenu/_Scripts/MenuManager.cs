@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour
@@ -25,7 +24,7 @@ public class MenuManager : MonoBehaviour
     public void SwitchMenu(Menu menu)
     {
         _currentMenu?.SetActive(false);
-        menu.SetActive(false);
+        menu.SetActive(true);
         
         _currentMenu = menu;
     }
