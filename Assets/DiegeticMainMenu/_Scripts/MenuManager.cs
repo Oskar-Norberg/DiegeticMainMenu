@@ -1,31 +1,27 @@
+using DiegeticMainMenu.Singleton;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+namespace DiegeticMainMenu
 {
-    public static MenuManager Instance { get; private set; }
-
-    [SerializeField] private Menu startingMenu;
-
-    private Menu _currentMenu;
-    
-    private void Awake()
+    public class MenuManager : Singleton<MenuManager>
     {
-        if (Instance)
+        [SerializeField] private Menu startingMenu;
+
+        private Menu _currentMenu;
+
+        protected override void Awake()
         {
-            Destroy(gameObject);
-            return;
+            base.Awake();
+
+            SwitchMenu(startingMenu);
         }
-        
-        Instance = this;
-        
-        SwitchMenu(startingMenu);
-    }
-    
-    public void SwitchMenu(Menu menu)
-    {
-        _currentMenu?.SetActive(false);
-        menu.SetActive(true);
-        
-        _currentMenu = menu;
+
+        public void SwitchMenu(Menu menu)
+        {
+            _currentMenu?.SetActive(false);
+            menu.SetActive(true);
+
+            _currentMenu = menu;
+        }
     }
 }
