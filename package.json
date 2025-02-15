@@ -22,5 +22,13 @@
     "url": "https://github.com/Oskar-Norberg"
   },
 
+  "samples": [
+    {
+      "displayName": "ExampleScene",
+      "description": "Contains basic setup for a scene with a Play, Credits and option panel.",
+      "path": "Samples~/Scene"
+    }
+  ],
+
   "licensesUrl": "https://www.gnu.org/licenses/gpl-3.0.en.html"
 }
