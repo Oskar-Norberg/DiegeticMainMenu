@@ -21,6 +21,11 @@ namespace DiegeticMainMenu
 
         private void Awake()
         {
+            if (!firstSelected)
+                Debug.LogWarning("No first selected object assigned to menu: " + name);
+            if (!cinemachineCamera)
+                Debug.LogWarning("No cinemachine camera assigned to menu: " + name);
+            
             _cachedPriority = cinemachineCamera.Priority;
             SetActive(false);
         }
