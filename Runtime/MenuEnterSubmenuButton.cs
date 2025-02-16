@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace DiegeticMainMenu
 {
     [RequireComponent(typeof(Button))]
-    public class MenuSwitcherButton : MonoBehaviour
+    public class MenuEnterSubmenuButton : MonoBehaviour
     {
         [SerializeField] private Menu menuToGoTo;
 
