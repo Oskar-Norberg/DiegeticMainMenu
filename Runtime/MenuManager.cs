@@ -8,6 +8,11 @@ namespace DiegeticMainMenu
     {
         [SerializeField] private Menu startingMenu;
 
+        public Menu CurrentMenu => _menuStack.Peek();
+
+        public delegate void OnMenuChangedEventHandler();
+        public event OnMenuChangedEventHandler OnMenuChanged;
+        
         private Stack<Menu> _menuStack = new Stack<Menu>();
 
         protected override void Awake()
@@ -23,7 +28,9 @@ namespace DiegeticMainMenu
                 _menuStack.Peek()?.SetActive(false);
             
             _menuStack.Push(menu);
-            _menuStack.Peek().SetActive(true);
+            menu.SetActive(true);
+            
+            OnMenuChanged?.Invoke();
         }
         
         public void Back()
@@ -33,6 +40,8 @@ namespace DiegeticMainMenu
             
             _menuStack.Pop().SetActive(false);
             _menuStack.Peek().SetActive(true);
+            
+            OnMenuChanged?.Invoke();
         }
     }
 }
