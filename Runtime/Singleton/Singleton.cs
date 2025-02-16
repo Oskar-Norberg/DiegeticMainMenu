@@ -29,11 +29,5 @@ namespace DiegeticMainMenu.Singleton
         
             _instance = this as T;
         }
-
-        protected void OnApplicationQuit()
-        {
-            _instance = null;
-            Destroy(gameObject);
-        }
     }
 }
