@@ -27,7 +27,7 @@ namespace DiegeticMainMenu
 
         private void SwitchMenu()
         {
-            MenuManager.Instance.SwitchMenu(menuToGoTo);
+            MenuManager.Instance.EnterSubMenu(menuToGoTo);
         }
     }
 }
