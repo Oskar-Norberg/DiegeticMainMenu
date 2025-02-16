@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -10,7 +9,7 @@ namespace DiegeticMainMenu
     {
         private GameObject _lastSelected;
         private bool _doHighlight;
-        
+
         private void OnEnable()
         {
             MenuManager.Instance.OnMenuChanged += OnMenuChanged;
@@ -35,16 +34,16 @@ namespace DiegeticMainMenu
         {
             EnableKeyboardNavigation();
         }
-        
+
         private void OnMenuChanged()
         {
             if (_lastSelected)
                 _lastSelected = MenuManager.Instance.CurrentMenu.FirstSelected.gameObject;
-            
+
             if (_doHighlight)
                 EventSystem.current.SetSelectedGameObject(_lastSelected);
         }
-        
+
         private void EnableMouseNavigation()
         {
             EventSystem.current.SetSelectedGameObject(null);
@@ -60,7 +59,7 @@ namespace DiegeticMainMenu
                 _lastSelected = EventSystem.current.currentSelectedGameObject;
                 return;
             }
-            
+
             if (_lastSelected)
                 EventSystem.current.SetSelectedGameObject(_lastSelected);
             else

@@ -8,13 +8,15 @@ namespace DiegeticMainMenu
     public class Menu : MonoBehaviour
     {
         private const int ActivatedPriority = 10;
-        [Header("Menu Properties")]
-        [SerializeField] private bool hideWhenInactive = false;
-        
-        [Header("Menu References")]
-        [SerializeField] private Selectable firstSelected;
+
+        [Header("Menu Properties")] [SerializeField]
+        private bool hideWhenInactive = false;
+
+        [Header("Menu References")] [SerializeField]
+        private Selectable firstSelected;
+
         [SerializeField] private CinemachineCamera cinemachineCamera;
-        
+
         public Selectable FirstSelected => firstSelected;
 
         private int _cachedPriority;
@@ -25,7 +27,7 @@ namespace DiegeticMainMenu
                 Debug.LogWarning("No first selected object assigned to menu: " + name);
             if (!cinemachineCamera)
                 Debug.LogWarning("No cinemachine camera assigned to menu: " + name);
-            
+
             _cachedPriority = cinemachineCamera.Priority;
             SetActive(false);
         }
@@ -34,7 +36,7 @@ namespace DiegeticMainMenu
         {
             if (hideWhenInactive)
                 gameObject.SetActive(active);
-            
+
             cinemachineCamera.gameObject.SetActive(active);
             cinemachineCamera.Priority = active ? ActivatedPriority : _cachedPriority;
         }
