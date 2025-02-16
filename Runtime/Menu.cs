@@ -14,6 +14,8 @@ namespace DiegeticMainMenu
         [Header("Menu References")]
         [SerializeField] private Selectable firstSelected;
         [SerializeField] private CinemachineCamera cinemachineCamera;
+        
+        public Selectable FirstSelected => firstSelected;
 
         private int _cachedPriority;
 
@@ -30,9 +32,6 @@ namespace DiegeticMainMenu
             
             cinemachineCamera.gameObject.SetActive(active);
             cinemachineCamera.Priority = active ? ActivatedPriority : _cachedPriority;
-
-            if (active)
-                EventSystem.current.SetSelectedGameObject(firstSelected.gameObject);
         }
     }
 }
