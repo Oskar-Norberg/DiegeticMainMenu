@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace DiegeticMainMenu
@@ -15,6 +16,7 @@ namespace DiegeticMainMenu
         private Selectable firstSelected;
 
         [SerializeField] private CinemachineCamera cinemachineCamera;
+        [SerializeField] public UnityAction OnMenuActivated;
 
         public Selectable FirstSelected => firstSelected;
 
@@ -35,6 +37,7 @@ namespace DiegeticMainMenu
         {
             if (hideWhenInactive)
                 gameObject.SetActive(active);
+                OnMenuActivated?.Invoke();
 
             cinemachineCamera.gameObject.SetActive(active);
             cinemachineCamera.Priority = active ? ActivatedPriority : _cachedPriority;
