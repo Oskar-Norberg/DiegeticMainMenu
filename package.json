@@ -1,6 +1,6 @@
 {
   "name": "com.ringo.diegetic-main-menu",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "displayName": "Diegetic Main Menu",
   "description": "Package for setting up a diegetic main menu using cinemachine.",
   
