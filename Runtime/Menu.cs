@@ -17,6 +17,7 @@ namespace DiegeticMainMenu
 
         [SerializeField] private CinemachineCamera cinemachineCamera;
         [SerializeField] public UnityAction OnMenuActivated;
+        [SerializeField] public UnityAction OnMenuDisabled;
 
         public Selectable FirstSelected => firstSelected;
 
@@ -37,7 +38,11 @@ namespace DiegeticMainMenu
         {
             if (hideWhenInactive)
                 gameObject.SetActive(active);
+            
+            if (active)
                 OnMenuActivated?.Invoke();
+            else
+                OnMenuDisabled?.Invoke();
 
             cinemachineCamera.gameObject.SetActive(active);
             cinemachineCamera.Priority = active ? ActivatedPriority : _cachedPriority;
