@@ -11,15 +11,17 @@ namespace DiegeticMainMenu
         public Menu CurrentMenu => _menuStack.Peek();
 
         public delegate void OnMenuChangedEventHandler();
-
         public event OnMenuChangedEventHandler OnMenuChanged;
+
+        public delegate void OnMenuBackEventHandler();
+        public event OnMenuBackEventHandler OnMenuBack;
 
         private Stack<Menu> _menuStack = new Stack<Menu>();
 
         protected override void Awake()
         {
             base.Awake();
-            
+
             if (!startingMenu)
                 Debug.LogWarning("No starting menu assigned to MenuManager");
 
@@ -41,6 +43,8 @@ namespace DiegeticMainMenu
         {
             if (_menuStack.Count <= 1)
                 return;
+
+            OnMenuBack?.Invoke();
 
             _menuStack.Pop().SetActive(false);
             _menuStack.Peek().SetActive(true);

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,17 +8,19 @@ namespace DiegeticMainMenu
     [RequireComponent(typeof(PlayerInput))]
     public class MenuNavigation : MonoBehaviour
     {
-        private GameObject _lastSelected;
+        private Dictionary<Menu, GameObject> _lastSelected = new Dictionary<Menu, GameObject>();
         private bool _doHighlight;
 
         private void OnEnable()
         {
             MenuManager.Instance.OnMenuChanged += OnMenuChanged;
+            MenuManager.Instance.OnMenuBack += OnMenuBack;
         }
 
         private void OnDisable()
         {
             MenuManager.Instance.OnMenuChanged -= OnMenuChanged;
+            MenuManager.Instance.OnMenuBack -= OnMenuBack;
         }
 
         private void OnClick()
@@ -33,15 +36,25 @@ namespace DiegeticMainMenu
         private void OnNavigate()
         {
             EnableKeyboardNavigation();
+            Navigate();
         }
 
         private void OnMenuChanged()
         {
-            if (_lastSelected)
-                _lastSelected = MenuManager.Instance.CurrentMenu.FirstSelected.gameObject;
+            var currentMenu = MenuManager.Instance.CurrentMenu;
 
-            if (_doHighlight)
-                EventSystem.current.SetSelectedGameObject(_lastSelected);
+            if (!_lastSelected.ContainsKey(MenuManager.Instance.CurrentMenu))
+                _lastSelected[currentMenu] = currentMenu.FirstSelected.gameObject;
+
+            if (!_doHighlight)
+                return;
+
+            EventSystem.current.SetSelectedGameObject(_lastSelected[currentMenu]);
+        }
+
+        private void OnMenuBack()
+        {
+            _lastSelected.Remove(MenuManager.Instance.CurrentMenu);
         }
 
         private void EnableMouseNavigation()
@@ -53,20 +66,24 @@ namespace DiegeticMainMenu
         private void EnableKeyboardNavigation()
         {
             _doHighlight = true;
+        }
 
-            if (EventSystem.current.currentSelectedGameObject)
+        private void Navigate()
+        {
+            var currentMenu = MenuManager.Instance.CurrentMenu;
+
+            if (!EventSystem.current.currentSelectedGameObject)
             {
-                _lastSelected = EventSystem.current.currentSelectedGameObject;
-                return;
+                GameObject selected = null;
+                if (_lastSelected.TryGetValue(currentMenu, out var value))
+                    selected = value;
+                else
+                    selected = currentMenu.FirstSelected.gameObject;
+                
+                EventSystem.current.SetSelectedGameObject(selected);
             }
 
-            if (_lastSelected)
-                EventSystem.current.SetSelectedGameObject(_lastSelected);
-            else
-            {
-                var firstSelectable = MenuManager.Instance.CurrentMenu.FirstSelected;
-                EventSystem.current.SetSelectedGameObject(firstSelectable.gameObject);
-            }
+            _lastSelected[currentMenu] = EventSystem.current.currentSelectedGameObject;
         }
     }
 }
